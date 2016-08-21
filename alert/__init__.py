@@ -5,7 +5,7 @@ import subprocess
 
 from docopt import docopt
 
-__version__ = '0.1'
+__version__ = '0.11'
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
     arguments = docopt(main.__doc__, version='OSX Alert 0.1')
 
     text = ' '.join(arguments.get('<text>'))
-    title = arguments.get('--title', 'Alert')
+    title = arguments.get('--title') or 'Alert'
 
     subprocess.call(["osascript", "-e", ('display notification "%s" with title "%s"' % (text, title))])
 
