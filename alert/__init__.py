@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 import subprocess
-
 from docopt import docopt
 
-__version__ = '0.11'
+__version__ = '0.12'
+
+
+def alert(text, title):
+    return subprocess.call(["osascript", "-e", ('display notification "%s" with title "%s"' % (text, title))])
 
 
 def main():
@@ -26,7 +28,7 @@ def main():
     text = ' '.join(arguments.get('<text>'))
     title = arguments.get('--title') or 'Alert'
 
-    subprocess.call(["osascript", "-e", ('display notification "%s" with title "%s"' % (text, title))])
+    return alert(text, title)
 
 
 if __name__ == '__main__':
